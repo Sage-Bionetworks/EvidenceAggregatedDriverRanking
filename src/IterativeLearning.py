@@ -39,6 +39,7 @@ def ILB(X,y,C = 1.0,pen='l2',Iter = 10,
 
     prev = y + 0.0
     y_orig = y + 0.0
+    y_p = []
 
     NoPos = []
     for i in range(Iter):
@@ -81,10 +82,15 @@ def CrossValScore(Mdl,X,y):
 
 
 
-def ICCT(X,y,C1 = 1.0, C2 = 1.0, C3= 1.0, Iter=10,rho=0.1,pen='l2', Thresh = 0.9, BC = True,Iter2=5):
+def ICCT(X,y, C = [1.0], Iter=10,rho=0.1,pen='l2', Thresh = 0.9, BC = True,Iter2=1):
 
     #X is a list of feature sets
     #y is the initial label in a numpy array
+    #C is list of logistic regression penalties
+
+    if len(C) < len(X):
+        C = C*len(X)
+
 
     K = len(X)
 
@@ -93,8 +99,6 @@ def ICCT(X,y,C1 = 1.0, C2 = 1.0, C3= 1.0, Iter=10,rho=0.1,pen='l2', Thresh = 0.9
     X_new = []
     y_new = []
 
-    n1 = len(y)
-    m = n + 0.0
     y_t = []
 
     if BC:
@@ -103,13 +107,17 @@ def ICCT(X,y,C1 = 1.0, C2 = 1.0, C3= 1.0, Iter=10,rho=0.1,pen='l2', Thresh = 0.9
             tmp = BalanceClasses(X1 + 0.0 ,y + 0.0)
             X1_new, y1_new = tmp['X'],tmp['y']
             n = len(y1_new)
+            n1 = len(y)
+            m = n + 0.0
             X_new += [X1_new + 0.0 ]
             y_new += [np.reshape(y1_new,(n,1)) + 0.0]
             y_t += [y + 0.0]
 
     else:
         for X1 in X:
-            n = len(y)
+            n = len(y1_new)
+            n1 = len(y)
+            m = n + 0.0
             X_new += [X1 + 0.0]
             y_new += [np.reshape(y,(n,1)) + 0.0]
             y_t += [y + 0.0]
@@ -129,8 +137,8 @@ def ICCT(X,y,C1 = 1.0, C2 = 1.0, C3= 1.0, Iter=10,rho=0.1,pen='l2', Thresh = 0.9
 
         for i in range(len(X_new)):
             X1_new = X_new[i]
-            LR1 = LogisticRegression(penalty = pen, solver = 'saga', C = C1)
-            LR1.fit(X1_new,y1_new)
+            LR1 = LogisticRegression(penalty = pen, solver = 'saga', C = C[i])
+            LR1.fit(X1_new,y_new[i])
             LR += [LR1]
             y_r += y_t[i] + 0.0
 
@@ -141,7 +149,7 @@ def ICCT(X,y,C1 = 1.0, C2 = 1.0, C3= 1.0, Iter=10,rho=0.1,pen='l2', Thresh = 0.9
             for i in range(len(X_new)):
                 X1 = X[i]
                 t = sum(y_t) - y[i] + 0.0
-                a = (1.0/(rho))*(np.asscalar(LR[i].intercept_) + X1.dot(np.transpose(LR1.coef_))) + (1.0/(K-1))*(t + 0.0)
+                a = (1.0/(rho))*(np.asscalar(LR[i].intercept_) + X1.dot(np.transpose(LR[i].coef_))) + (1.0/(K-1))*(t + 0.0)
                 y_t[i] = np.maximum(np.zeros((n1,1)),np.minimum(np.ones((n1,1)),a)) + 0.0
 
                 if cnt == Iter2-1:
