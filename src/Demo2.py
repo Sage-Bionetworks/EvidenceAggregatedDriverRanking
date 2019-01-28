@@ -73,9 +73,9 @@ for i in Classes:
     C = [C1,C2,C3]
 
     #training non-iterative models
-    tmp1 = SF.ILB(X1,Yi,Iter = 1, C = C1)
-    tmp2 = SF.ILB(X2,Yi,Iter = 1, C = C2)
-    tmp3 = SF.ILB(X3,Yi,Iter = 1, C = C3)
+    tmp1 = SF.IC(X1,Yi,Iter = 1, C = C1)
+    tmp2 = SF.IC(X2,Yi,Iter = 1, C = C2)
+    tmp3 = SF.IC(X3,Yi,Iter = 1, C = C3)
 
 
     Mod1_acc += [accuracy_score(Yi_t,tmp1['y'])]
@@ -83,9 +83,9 @@ for i in Classes:
     Mod3_acc += [accuracy_score(Yi_t,tmp3['y'])]
 
     #training iterative models without co-training
-    tmp1 = SF.ILB(X1,Yi,Iter = 10, C = C1)
-    tmp2 = SF.ILB(X2,Yi,Iter = 10, C = C2)
-    tmp3 = SF.ILB(X3,Yi,Iter = 10, C = C3)
+    tmp1 = SF.IC(X1,Yi,Iter = 10, C = C1)
+    tmp2 = SF.IC(X2,Yi,Iter = 10, C = C2)
+    tmp3 = SF.IC(X3,Yi,Iter = 10, C = C3)
 
     Y_temp = ((tmp1['y'] + tmp2['y'] + tmp3['y'])/3.0 > 0.5) + 0.0
 

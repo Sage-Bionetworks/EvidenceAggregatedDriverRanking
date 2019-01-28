@@ -34,7 +34,7 @@ def BalanceClasses(X,y):
     return {'X':X_new, 'y':Y_new}
 
 
-def ILB(X,y,C = 1.0,pen='l2',Iter = 10,
+def IC(X,y,C = 1.0,pen='l2',Iter = 10,
                       Thresh = 0.9):
 
     prev = y + 0.0
