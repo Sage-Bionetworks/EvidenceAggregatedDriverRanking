@@ -7,3 +7,19 @@ Late onset Alzheimer’s disease (LOAD) is currently a disease with no known eff
 While we currently focus on demonstrating the effectiveness of the approach using different analytic outcomes from RNA-Seq studies, this method is easily generalizable to other data modalities and analysis types. 
 
 We demonstrate the utility of our machine learning algorithm on two benchmark multi-view datasets by significantly outperforming the baseline approaches in predicting missing labels. We then use the algorithm to predict and rank potential drivers of Alzheimers. We show that our ranked genes show a significant enrichment for SNPs associated with Alzheimers, and are enriched in pathways that have been previously associated with the disease.
+
+## Installation: 
+
+```
+git clone https://github.com/Sage-Bionetworks/EvidenceAggregatedDriverRanking.git
+```
+
+## Testing demo codes:
+```Python
+python src/Demo1.py
+python src/Demo2.py
+```
+
+## Link to RNA-Seq features:
+[Link to Synapse repository](https://www.synapse.org/#!Synapse:syn18097422/files/)
+
