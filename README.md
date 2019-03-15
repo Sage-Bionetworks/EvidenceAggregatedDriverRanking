@@ -1,7 +1,7 @@
 # EvidenceAggregatedDriverRanking
 Ranking methodology of potential Driver genes using multi-view feature sets as described in:
 
-[https://www.biorxiv.org/content/10.1101/534305v1](https://www.biorxiv.org/content/10.1101/534305v1)
+Mukherjee, S., Perumal, T., Daily, K., Sieberts, S., Omberg, L., Preuss, C., Carter, G., Mangravite, L. and Logsdon, B., 2019. [Identifying and ranking potential driver genes of Alzheimer's Disease using multi-view evidence aggregation](https://www.biorxiv.org/content/10.1101/534305v1). (Accepted to ISMB/ECCB 2019)
 
 ## Abstract: 
 
