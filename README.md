@@ -10,6 +10,12 @@ While we currently focus on demonstrating the effectiveness of the approach usin
 
 We demonstrate the utility of our machine learning algorithm on two benchmark multi-view datasets by significantly outperforming the baseline approaches in predicting missing labels. We then use the algorithm to predict and rank potential drivers of Alzheimers. We show that our ranked genes show a significant enrichment for SNPs associated with Alzheimers, and are enriched in pathways that have been previously associated with the disease.
 
+
+## Requirements:
+
+This tool has been tested on Python version 2.7.13, scikit-learn version 0.19.1, numpy version 1.15.4 and scipy version 1.0.0. 
+
+
 ## Installation: 
 
 ```
